@@ -19,7 +19,7 @@ function destinationInfo(arr) {
   var i;
   for (i = 0; i < arr.length; i++) {
     out += '<div style="width: 350px; height: 500px; float: left; margin-left: 10px; margin-bottom: 7%;">';
-    out += '<h1>' + arr[i].name + '</h1>';
+    out += '<h1 style="text-align: center;">' + arr[i].name + '</h1>';
     // na h1 style="height: 35px;" 
     out += '<a href="additionalDestinationsInfo.html?destination_id=' + arr[i].id + '"><img src="' + arr[i].mainPhoto + '" style="width:350px; height:250px;"></a>';
     out += '<h3 style="font-size:14px;">' + arr[i].additionalInfo + '</h3>' + '</div>';
@@ -64,7 +64,7 @@ function additionalInfo(arr) {
   var out = "";
   var i;
   for (i = 0; i < arr.length; i++) {
-    out += '<div style="width:350px; float: left; margin-left: 10px; margin-bottom: 7%;">';
+    out += '<div style="width:350px; float: left; margin-left: 10px; margin-bottom: 7%; margin-top: 5%;">';
     out += '<img src="' + arr[i].mainPhoto + '" style="width:350px; height:250px;">';
     out += '<p>' + arr[i].history + '</p>';
     out += '<p style="font-size:14px;">' + arr[i].interestingfacts + '</p>';
@@ -74,7 +74,9 @@ function additionalInfo(arr) {
 }
 
 
-
+// getURLParameter in Javascript
+// http://stackoverflow.com/questions/11582512/how-to-get-url-parameters-with-javascript
+// regex (regular expression)
 function getURLParameter(name) {
   return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
 }
@@ -312,7 +314,7 @@ window.onload = loadScript;
 //   },
 //     function (response, status) {
 //       if (status === 'OK') {
-//         //s for minavash prez vsichki izrani destinacii i slagash markeri pokazano na 
+//         //s for minavash prez vsichki izbrani destinacii i slagash markeri pokazano na 
 //         //https://developers.google.com/maps/documentation/javascript/examples/directions-complex
 //         //method showSteps
 //         directionsDisplay.setDirections(response);

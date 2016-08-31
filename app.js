@@ -1,13 +1,25 @@
 //Lets require/import the HTTP module
 var http = require('http');
 var express = require('express');
+var session = require('express-session');
+var RedisStore = require('connect-redis')(session);
 var app = express();
-var tsp = require('./tsp');
+var tsp = require('./tsp'); //tsp e lokalen fail, zatova ima ./
 var bodyParser = require('body-parser');
+var db_layer = require('./db_layer.js'); //db_layer.js e lokalen fail
+var passport = require('passport');
 app.use(bodyParser.json());       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
 }));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(express.cookieParser());
+app.use(express.session({
+    secret: "cookie_secret",
+    name: "cookie_name"
+}));
+app.use(app.router);
 app.use(express.json());       // to support JSON-encoded bodies
 app.use(express.urlencoded()); // to support URL-encoded bodies
 
@@ -159,13 +171,15 @@ app.post('/getAdditionalInfo', function (req, res) {
             timeopen: "Работно време: " + rows[0].timeopen
           };
           res.send(jsonResult);
-    //      console.log(jsonResult);
+          //      console.log(jsonResult);
         });
       // destinations.push(destination);
     }
   );
 });
 
+
+// registration
 
 sha256 = require('js-sha256');
 
@@ -182,8 +196,6 @@ app.post('/registerUser', function (req, res) {
     //  console.log(salt);
     password = password + salt;
     password = sha256(password);
-
-
 
     connection.query(
       'insert into users (users.username, users.email, users.isadmin, users.password, users.salt) ' +
@@ -207,6 +219,55 @@ app.post('/registerUser', function (req, res) {
 
 
 
+// login
+
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(user, done) {
+  done(null, user);
+});
+
+  var LocalStrategy = require('passport-local').Strategy;
+
+passport.use(new LocalStrategy(
+  function (username, password, done) {
+    //function () e callback
+    db_layer.getUser(username, connection, function (user) {
+      if (user == null) {
+        return done(null, false);
+      } else {
+        password = password + user.salt;
+        password = sha256(password);
+        if (password == user.password) {
+          return done(null, {});
+        } else {
+          return done(null, false);
+        }
+      }
+    });
+  }
+));
+
+
+app.post('/login',
+  passport.authenticate('local', {
+    successRedirect: '/chooseDestinations.html',
+    failureRedirect: '/login.html',
+    failureFlash: true
+  })
+);
+
+
+
+app.get('/logout', function(req, res){                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+  // destroy the user's session to log them out                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+  // will be re-created next request                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+  req.session.destroy(function(){                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+    res.redirect('/index.html');                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+  });                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+});   
 
 
 
