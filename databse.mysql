@@ -5,9 +5,9 @@ create table destination(
 	primary key(id),
 	name varchar(240) not null,
 	unique(name),
-	longtitude float(10, 6) not null,
+	longitude float(10, 6) not null,
 	latitude float(10, 6) not null,
-	unique(longtitude, latitude),
+	unique(longitude, latitude),
 	timeopen varchar(240) not null,
 	history longtext,
 	interestingfacts longtext

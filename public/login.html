@@ -101,9 +101,9 @@ function googleTranslateElementInit() {
 
                                 <div style="margin-top:10px" class="form-group">
                                     <div class="col-sm-12 controls">
-                                      <button type="submit" id="btn-login" href="#" class="btn btn-success" type="button">Вход  </button>
-                                      <button id="btn-fblogin" href="#" class="btn btn-primary" type="button">Вход с Facebook</button>
-                                      <button class="form-link btn btn-primary" style="float:right;" type="button">Регистрирай се</button> 
+                                      <button type="submit" id="btn-login" class="btn btn-success" type="button">Вход</button>
+                                      <button id="btn-fblogin" class="btn btn-primary" type="button">Вход с Facebook</button>
+                                      <button onclick="window.location.href='/reg.html'" class="form-link btn btn-primary" id="regBtn" style="float:right;" type="button">Регистрирай се</button> 
                                       <!-- kato se cukne na Registrirai se, trqbva da se otvarq stranicata reg.html;
                                       <a href="reg.html"> -->
                                     </div>
@@ -150,13 +150,13 @@ function googleTranslateElementInit() {
 			</div>
             <a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button" data-toggle="tooltip" data-placement="left"><span class="glyphicon glyphicon-chevron-up"></span></a>
                <script>
-                    $(document).ready(function(){
+                     $(document).ready(function(){
                         $(window).scroll(function () {
                                 if ($(this).scrollTop() > 50) {
                                     $('#back-to-top').fadeIn();
                                 } else {
                                     $('#back-to-top').fadeOut();
-                                }
+                                
                             });
                             // scroll body to 0px on click
                         $('#back-to-top').click(function () {

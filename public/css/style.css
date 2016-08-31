@@ -209,5 +209,12 @@ input[type=checkbox] {
   font-weight: 400;
 }
 
+.fa {
+      margin-top: 7px;
+}
+
+#back-to-top {
+      height: 46px;
+}
 
 /* End footer */

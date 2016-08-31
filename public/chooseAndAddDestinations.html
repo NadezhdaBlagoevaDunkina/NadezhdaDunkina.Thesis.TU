@@ -1,0 +1,64 @@
+<html>
+
+<head>
+    <!--<script src="jquery.js"></script> -->
+
+    <title>Пътуване</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf8" />
+    <meta name="description" content="TUSofia">
+    <meta name="keywords" content="HTML">
+    <meta name="author" content="Nadeto">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <link rel=stylesheet type="text/css" href="css/style.css">
+    <script src="/js/libs/jquery-3.0.0.min.js"></script>
+    <script src="/js/main.js"></script>
+
+    <link rel="stylesheet" href="css/footer-distributed.css">
+
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/3-col-portfolio.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script> 
+    $(function(){
+      $("#includedContent").load("chooseDestinations.html"); 
+    });
+    </script>
+</head>
+
+<body onLoad="chooseDestinations()">
+    <div id="includedContent"></div>
+    <form action="action_page.php">
+        <fieldset>
+            <legend>Добавяне на дестинация:</legend>
+            Име на дестинация:<br>
+            <input type="text" name="name">
+            <br><br>Георг. дължина:<br>
+            <input type="number" name="longitude">
+            <br><br>Геогр. ширина:<br>
+            <input type="number" name="latitude">
+            <br><br>Работно време:<br>
+            <input type="text" name="timeopen">
+            <br><br>История:
+            <br>
+            <input type="text" name="history">
+            <br><br>Интересни факти:<br>
+            <input type="text" name="interestingfacts">
+            <br><br>Основна информация:<br>
+            <input type="text" name="info">
+            <br><br>
+            <button type="submit">Добави дестинация</button>
+        </fieldset>
+    </form>
+</body>
+</html>

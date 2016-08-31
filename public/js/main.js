@@ -181,13 +181,13 @@ function calculateAndDisplayRoute(directionsDisplay, directionsService,
 
   var tourGuideCoordinates = [];
   for (var i = 0; i < destinationsArr.length; i++) {
-    var coordinate = new google.maps.LatLng(destinationsArr[i].latitude, destinationsArr[i].longtitude);
+    var coordinate = new google.maps.LatLng(destinationsArr[i].latitude, destinationsArr[i].longitude);
     tourGuideCoordinates.push({ location: coordinate, stopover: true });
   }
 
   directionsService.route({
-    origin: new google.maps.LatLng(destinationsArr[0].latitude, destinationsArr[0].longtitude),
-    destination: new google.maps.LatLng(destinationsArr[destinationsArr.length - 1].latitude, destinationsArr[destinationsArr.length - 1].longtitude),
+    origin: new google.maps.LatLng(destinationsArr[0].latitude, destinationsArr[0].longitude),
+    destination: new google.maps.LatLng(destinationsArr[destinationsArr.length - 1].latitude, destinationsArr[destinationsArr.length - 1].longitude),
     waypoints: tourGuideCoordinates,
     optimizeWaypoints: true,
     travelMode: 'WALKING'
@@ -217,7 +217,7 @@ function showSteps(destinationsArr, stepDisplay, map, markerArray) {
   var myRoute = destinationsArr[0];
   for (var i = 0; i < destinationsArr.length; i++) {
     var letter = labels[i];
-    var marker = new google.maps.Marker({ position: { lat: destinationsArr[i].latitude, lng: destinationsArr[i].longtitude }, label: letter, map: map });
+    var marker = new google.maps.Marker({ position: { lat: destinationsArr[i].latitude, lng: destinationsArr[i].longitude }, label: letter, map: map });
 
     attachInstructionText(
       stepDisplay, marker, destinationsArr[i].name, map);
@@ -279,7 +279,7 @@ function onLoginButtonClick() {
 // google map 
 
 function initialize() {
-  var mapProp = {
+  var mapProp = { 
     center: new google.maps.LatLng(42.696552, 23.32601),
     zoom: 11,
     mapTypeId: google.maps.MapTypeId.ROADMAP

@@ -83,7 +83,7 @@ module.exports = {
                 return 0;
             }
             //TODO provide beter implementation
-            return Math.sqrt(Math.pow(d1.latitude - d2.latitude, 2) + Math.pow(d1.longtitude - d2.longtitude, 2));
+            return Math.sqrt(Math.pow(d1.latitude - d2.latitude, 2) + Math.pow(d1.longitude - d2.longitude, 2));
         };
         return algorithm;
     }

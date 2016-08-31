@@ -109,14 +109,11 @@ function googleTranslateElementInit() {
 						<div style="margin-bottom: 25px" class="input-group">
 							<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
 							<input id="login-repeat-password" type="password" class="form-control" name="repeat-password" placeholder="Потвърдете паролата" required>
-						</div>
-
-
-							
+						</div>							
 						<div style="margin-top:10px;" class="form-group">
 							<!-- Button -->
 							<div class="col-sm-12 controls">
-								<button id="btn-login" href="#" class="btn btn-success" onclick="onLoginButtonClick()" type="button">Регистрация</button>
+								<button id="btn-login" class="btn btn-success" onclick="onLoginButtonClick()" type="submit">Регистрация</button>
 							</div>
 						</div>                                 
 					</form>     
@@ -164,7 +161,7 @@ function googleTranslateElementInit() {
                                     $('#back-to-top').fadeIn();
                                 } else {
                                     $('#back-to-top').fadeOut();
-                                }
+                                
                             });
                             // scroll body to 0px on click
                         $('#back-to-top').click(function () {

@@ -74,9 +74,9 @@ app.post('/getAllDestinations', function (req, res) {
 
 
 app.post('/getOptimalRoute', function (req, res) {
-  // var desiredDestinations = [{"name":"ndk", "latitude":23.1234, "longtitude":42.4321},
-  //     {"name":"kopitoto", "latitude":23.4321, "longtitude":43.1234},
-  //     {"name":"nim", "latitude":23.5678, "longtitude":42.8765}];//TODO get this from request
+  // var desiredDestinations = [{"name":"ndk", "latitude":23.1234, "longitude":42.4321},
+  //     {"name":"kopitoto", "latitude":23.4321, "longitude":43.1234},
+  //     {"name":"nim", "latitude":23.5678, "longitude":42.8765}];//TODO get this from request
 
   // console.log(req.body.ids[0]);
   connection.query(
@@ -84,7 +84,7 @@ app.post('/getOptimalRoute', function (req, res) {
     // toest trqbva da se promeni zaqvkata
     // zaqvkata e promenena
 
-    'select destinations.name, destinations.latitude, destinations.longtitude from destinations ' +
+    'select destinations.name, destinations.latitude, destinations.longitude from destinations ' +
     'where id IN (' + req.body.ids + ')',
     function (err, rows) {
       if (err) throw err;
@@ -95,7 +95,7 @@ app.post('/getOptimalRoute', function (req, res) {
         var destination = {
           name: rows[i].name,
           latitude: rows[i].latitude,
-          longtitude: rows[i].longtitude
+          longitude: rows[i].longitude
         };
         desiredDestinations.push(destination);
       }
@@ -111,11 +111,11 @@ app.post('/getOptimalRoute', function (req, res) {
 
 
 
-//   var desiredDestinations = [{"name":"ndk", "latitude":0, "longtitude":0},
-//       {"name":"kopitoto", "latitude":0, "longtitude":30},
-//       {"name":"nim", "latitude":40, "longtitude":0},
-//       {"name":"asdf", "latitude":40, "longtitude":30},
-//       {"name":"qwe", "latitude":30, "longtitude":40}];//TODO get this from request
+//   var desiredDestinations = [{"name":"ndk", "latitude":0, "longitude":0},
+//       {"name":"kopitoto", "latitude":0, "longitude":30},
+//       {"name":"nim", "latitude":40, "longitude":0},
+//       {"name":"asdf", "latitude":40, "longitude":30},
+//       {"name":"qwe", "latitude":30, "longitude":40}];//TODO get this from request
 //   var tspAlgorithm = tsp.getTspAlgorithm();
 //   tspAlgorithm.setDestinations(desiredDestinations);
 //   var orderedDestinations = tspAlgorithm.calculateOptimalRoute();
