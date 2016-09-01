@@ -180,6 +180,7 @@ function calculateAndDisplayRoute(directionsDisplay, directionsService,
 
 
   var tourGuideCoordinates = [];
+
   for (var i = 0; i < destinationsArr.length; i++) {
     var coordinate = new google.maps.LatLng(destinationsArr[i].latitude, destinationsArr[i].longitude);
     tourGuideCoordinates.push({ location: coordinate, stopover: true });
@@ -190,7 +191,7 @@ function calculateAndDisplayRoute(directionsDisplay, directionsService,
     destination: new google.maps.LatLng(destinationsArr[destinationsArr.length - 1].latitude, destinationsArr[destinationsArr.length - 1].longitude),
     waypoints: tourGuideCoordinates,
     optimizeWaypoints: true,
-    travelMode: 'WALKING'
+    travelMode: 'WALKING' // WALKING or DRIVING
   },
     function (response, status) {
       // Route the directions and pass the response to a function to create
