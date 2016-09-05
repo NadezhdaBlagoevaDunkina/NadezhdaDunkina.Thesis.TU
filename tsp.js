@@ -12,6 +12,9 @@ module.exports = {
             this.calculateAdjacencyMatrix();
             var orderedDestinations = [];
             var numberOfNodes = this.desiredDestinations.length; //v numberOfNodes ima broq na jelanite destinacii
+            if (numberOfNodes == 0) {
+                return orderedDestinations;
+            }
             var visited = new Array(numberOfNodes + 1);
             // +1 -> za da ima mqsto za vsichki destinacii
             for (var index = 0; index < visited.length; index++) {

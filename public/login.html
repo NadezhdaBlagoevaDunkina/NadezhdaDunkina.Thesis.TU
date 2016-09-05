@@ -41,15 +41,10 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li>
-                        <a href="#">About</a>
-                    </li>
-                    <li>
-                        <a href="#">Services</a>
-                    </li>
-                    <li>
+                    
+                    <!--<li>
                         <a href="#">Contact</a>
-                    </li>
+                    </li>-->
                     <li>
                        <a href="login.html">Вход</a>
                     </li>
@@ -83,7 +78,7 @@ function googleTranslateElementInit() {
                         <!--<div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="#">Forgot password?</a></div>-->
                     </div>     
 
-                    <div style="padding-top:30px" class="panel-body" >
+                    <div style="padding-top:30px" class="panel-body">
 
                         <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
                             
@@ -119,58 +114,12 @@ function googleTranslateElementInit() {
 
 <div class="clear"></div>
       <!--<div id="googleMap" style="width:500px;height:380px;"></div>-->
-<footer class="footer-distributed">
-
-			<div class="footer-right">
-
-				<a href="https://www.facebook.com/" target="_blank"><i class="fa fa-facebook"></i></a>
-				<a href="https://twitter.com/" target="_blank"><i class="fa fa-twitter"></i></a>
-				<a href="https://www.instagram.com/" target="_blank"><i class="fa fa-instagram"></i></a>
-
-			</div>
-
-			<div class="footer-left">
-					<img src="img/tu-logo.png" />
-
-				<!--<p class="footer-links">
-					<a href="#">Home</a>
-					<a href="#">Blog</a>
-					·
-					<a href="#">Pricing</a>
-					·
-					<a href="#">About</a>
-					·
-					<a href="#">Faq</a>
-					·
-					<a href="#">Contact</a>
-
-				</p>-->
-
-				<p>Nadezhda Blagoeva Dunkina, FKSU, TU-Sofia, 2016</p>
-			</div>
-            <a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button" data-toggle="tooltip" data-placement="left"><span class="glyphicon glyphicon-chevron-up"></span></a>
-               <script>
-                     $(document).ready(function(){
-                        $(window).scroll(function () {
-                                if ($(this).scrollTop() > 50) {
-                                    $('#back-to-top').fadeIn();
-                                } else {
-                                    $('#back-to-top').fadeOut();
-                                
-                            });
-                            // scroll body to 0px on click
-                        $('#back-to-top').click(function () {
-                            $('#back-to-top').tooltip('hide');
-                            $('body,html').animate({
-                                scrollTop: 0
-                            }, 800);
-                            return false;
-                        });
-                        
-                        $('#back-to-top').tooltip('show');
-                    });
-            </script>
-		</footer>
+<div id="footerId"></div>
+    <script> 
+    $(function(){
+      $("#footerId").load("footer.html"); 
+    });
+    </script>
 </body>
 </html>
 

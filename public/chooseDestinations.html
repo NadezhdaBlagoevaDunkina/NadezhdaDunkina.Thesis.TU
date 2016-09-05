@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>Пътуване</title>
     <meta http-equiv="content-type" content="text/html; charset=utf8" />
@@ -29,10 +30,10 @@
 
 </head>
 
-    <body  onLoad="chooseDestinations()">
+<body onLoad="chooseDestinations()">
 
 
-<!-- Navigation -->
+    <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -48,18 +49,13 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li>
-                        <a href="#">About</a>
-                    </li>
-                    <li>
-                        <a href="#">Services</a>
-                    </li>
-                    <li>
-                       <a href="login.html">Вход</a>
+                    
+                    <!--<li>
+                        <a href="login.html">Вход</a>
                     </li>
                     <li>
                         <a href="reg.html">Регистрация</a>
-                    </li>
+                    </li>-->
                     <li>
                         <a href="/logout">Изход</a>
                     </li>
@@ -68,7 +64,7 @@
               		<span class="glyphicon glyphicon-search form-control-feedback"></span>
                     </li>-->
                     <li>
-                      <div id="google_translate_element"></div><script type="text/javascript">
+                        <div id="google_translate_element"></div><script type="text/javascript">
 function googleTranslateElementInit() {
   new google.translate.TranslateElement({pageLanguage: 'bg', includedLanguages: 'de,en,fr', layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL}, 'google_translate_element');
 }
@@ -82,54 +78,49 @@ function googleTranslateElementInit() {
     </nav>
 
 
-<h1 id="destinationHeader">Изберете дестинации:</h1>
-<div id="allDestinations"> </div>
-<button onclick="getRoute()" id="btnChoose">Избери</button>
+    <h1 id="destinationHeader">Изберете дестинации:</h1>
+    <div id="allDestinations"> </div>
+    <button onclick="getRoute()" id="btnChoose" class="btnDest">Избери</button>
 
-    
- <div id="googleMap" style="width:700px;height:480px;"></div>
 
-<!-- how to read and write in session -->
 
-      <footer class="footer-distributed">
+    <div id="googleMap"></div>
 
-			<div class="footer-right">
 
-				<a href="https://www.facebook.com/" target="_blank"><i class="fa fa-facebook"></i></a>
-				<a href="https://twitter.com/" target="_blank"><i class="fa fa-twitter"></i></a>
-				<a href="https://www.instagram.com/" target="_blank"><i class="fa fa-instagram"></i></a>
+    <form action="/insertDestination" method="post" class="classForm">
+        <fieldset>
+            <div class="headingForm">
+                <legend class="title">Добавяне на дестинация:</legend>
+            </div>
+            Име на дестинация:<br>
+            <input type="text" name="name">
+            <br><br>Георг. дължина:<br>
+            <input type="number" name="longitude">
+            <br><br>Геогр. ширина:<br>
+            <input type="number" name="latitude">
+            <br><br>Работно време:<br>
+            <input type="text" name="timeopen">
+            <br><br>История:<br>
+            <!--<input type="text" name="history">-->
+            <textarea rows="4" cols="35" placeholder="Добавете история..."></textarea>
 
-			</div>
+            <br><br>Интересни факти:<br>
+            <!--<input type="text" name="interestingfacts">-->
+            <textarea rows="4" cols="35" placeholder="Добавете интересни факти..."></textarea>
+            <br><br>Основна информация:<br>
+            <!--<input type="text" name="info">-->
+            <textarea rows="4" cols="35" placeholder="Добавете основна информация..."></textarea>
+            <br><br>
+            <button type="submit" value="Submit" class="btnDest">Добави дестинация</button>
+            <button type="reset" value="Reset" class="btnDest">Изчисти полетата</button>
+        </fieldset>
+    </form>
+    <div id="footerId"></div>
+    <script> 
+    $(function(){
+      $("#footerId").load("footer.html"); 
+    });
+    </script>
+</body>
 
-			<div class="footer-left">
-					<img src="img/tu-logo.png" />
-
-				<p>Nadezhda Blagoeva Dunkina, FKSU, TU-Sofia, 2016</p>
-			</div>
-            <a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button" data-toggle="tooltip" data-placement="left"><span class="glyphicon glyphicon-chevron-up"></span></a>
-               <script>
-                    $(document).ready(function(){
-                        $(window).scroll(function () {
-                                if ($(this).scrollTop() > 50) {
-                                    $('#back-to-top').fadeIn();
-                                } else {
-                                    $('#back-to-top').fadeOut();
-                                }
-                            });
-                            // scroll body to 0px on click
-                        $('#back-to-top').click(function () {
-                            $('#back-to-top').tooltip('hide');
-                            $('body,html').animate({
-                                scrollTop: 0
-                            }, 800);
-                            return false;
-                        });
-                        
-                        $('#back-to-top').tooltip('show');
-                    });
-            </script>
-		</footer>
-        </body>
 </html>
-
-

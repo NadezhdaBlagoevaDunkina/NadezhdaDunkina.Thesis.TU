@@ -16,8 +16,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.cookieParser());
 app.use(express.session({
-    secret: "cookie_secret",
-    name: "cookie_name"
+  secret: "cookie_secret",
+  name: "cookie_name"
 }));
 app.use(app.router);
 app.use(express.json());       // to support JSON-encoded bodies
@@ -77,8 +77,22 @@ app.post('/getOptimalRoute', function (req, res) {
   // var desiredDestinations = [{"name":"ndk", "latitude":23.1234, "longitude":42.4321},
   //     {"name":"kopitoto", "latitude":23.4321, "longitude":43.1234},
   //     {"name":"nim", "latitude":23.5678, "longitude":42.8765}];//TODO get this from request
+  var latitude = req.body.latitude;
+  var longitude = req.body.longitude;
+  var desiredDestinations = [];
 
-  // console.log(req.body.ids[0]);
+  var currDestination = {
+        name: "Current Position",
+        latitude: latitude,
+        longitude: longitude
+      };
+      desiredDestinations.push(currDestination);
+
+
+  if (req.body.ids.length === 0) {
+    res.send({ destinations: [] });
+    return;
+  }
   connection.query(
     // destination trqbva da e jelanite ot potrebitelq destinacii
     // toest trqbva da se promeni zaqvkata
@@ -89,8 +103,9 @@ app.post('/getOptimalRoute', function (req, res) {
     function (err, rows) {
       if (err) throw err;
       // console.log(rows);
-      var desiredDestinations = [];
+      //var desiredDestinations = [];
       // arr[0] e current poziciqta na turista
+
       for (var i in rows) {
         var destination = {
           name: rows[i].name,
@@ -221,15 +236,23 @@ app.post('/registerUser', function (req, res) {
 
 // login
 
-passport.serializeUser(function(user, done) {
-  done(null, user);
+passport.serializeUser(function (user, done) {
+  console.log('serialize user ' + user.username);
+  done(null, user.username);
 });
 
-passport.deserializeUser(function(user, done) {
-  done(null, user);
+passport.deserializeUser(function (username, done) {
+  console.log('deserialize user ' + username);
+  db_layer.getUser(username, connection, function (user) {
+    if (user == null) {
+      return done(null, false);
+    } else {
+      return done(null, { id: user.id, username: user.username });
+    }
+  });
 });
 
-  var LocalStrategy = require('passport-local').Strategy;
+var LocalStrategy = require('passport-local').Strategy;
 
 passport.use(new LocalStrategy(
   function (username, password, done) {
@@ -241,7 +264,7 @@ passport.use(new LocalStrategy(
         password = password + user.salt;
         password = sha256(password);
         if (password == user.password) {
-          return done(null, {});
+          return done(null, { id: user.id, username: user.username });
         } else {
           return done(null, false);
         }
@@ -261,14 +284,64 @@ app.post('/login',
 
 
 
-app.get('/logout', function(req, res){                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+app.get('/logout', function (req, res) {
   // destroy the user's session to log them out                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
   // will be re-created next request                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
-  req.session.destroy(function(){                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
-    res.redirect('/index.html');                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
-  });                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
-});   
+  req.session.destroy(function () {
+    res.redirect('/index.html');
+  });
+});
 
+app.post('/insertDestination', function (req, res) {
+  var username = req.session.passport.user;
+  var name = req.body.name;
+  var longitude = req.body.longitude;
+  var latitude = req.body.latitude;
+  var timeopen = req.body.timeopen;
+  var history = req.body.history;
+  var interestingfacts = req.body.interestingfacts;
+  var info = req.body.info;
+  db_layer.getUser(username, connection, function (user) {
+    if (user == null || !user.isadmin) {
+      res.redirect('/index.html'); //nqkakva geshka; stranica, v koqto da izpishe, che ne si admin i nqmash prava za dobavqne na destinaciq
+    } else {
+      connection.query(
+        'insert into destinations (destinations.name, destinations.longitude, destinations.latitude, destinations.timeopen, destinations.history, destinations.interestingfacts, destinations.info) ' + //fix query
+        'values ("' + name + '", "' + longitude + '", "' + latitude + '", "' + timeopen + '", "' + history + '", "' + interestingfacts + '", "' + info + '")',
+        function (err, rows) {
+          if (err) throw err;
+          res.redirect('/chooseDestinations.html'); //onova s destinaciite
+        });
+    }
+  });
+});
+
+
+// dobaveno
+
+passport.serializeUser(function (user, done) {
+  console.log('serialize user ' + user.username);
+  done(null, user.username);
+});
+
+app.post('/getUserInfo', function (req, res) {
+  db_layer.getUser(username, connection, function (user) {
+    // if (user == null || !user.isadmin) {
+    //   res.redirect('/index.html');
+    // var users = [];
+    var user = {
+      id: rows[i].id,
+      username: rows[i].username,
+      email: rows[i].email,
+      isadmin: rows[i].isadmin
+    };
+    // users.push(user);
+    var jsonResult = {
+      user: user
+    };
+    res.send(jsonResult);
+  });
+});
 
 
 app.listen(PORT);

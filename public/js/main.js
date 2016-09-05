@@ -1,3 +1,5 @@
+var currPosition;
+
 function drawDestinations() {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
@@ -121,7 +123,7 @@ function chooseFromAllDestinations(arr) {
   var out = "";
   var i;
   for (i = 0; i < arr.length; i++) {
-    out += '<input type="checkbox" value="' + arr[i].id + '"class="destinationCheckbox">' + arr[i].name + '<br>';
+    out += '<label><input type="checkbox" value="' + arr[i].id + '"class="destinationCheckbox">' + arr[i].name + '</label><br>';
   }
   document.getElementById("allDestinations").innerHTML = out;
 }
@@ -147,10 +149,18 @@ function getRoute() {
   };
   xhttp.open("POST", "/getOptimalRoute", true);
   xhttp.setRequestHeader('Content-type', 'application/json');
-  xhttp.send('{"ids":[' + checkedValues + ']}');
+  //xhttp.send('{"ids":[' + checkedValues + ']}');
+  // xhttp.send('{"username":"' + userName.value + '", "email":"' + email.value + '", "password":"' + passText + '", "repeatPassword":"' + repeatPassText + '"}');
 
+  xhttp.send('{"ids":[' + checkedValues + '] , "latitude":"' + currPosition.coords.latitude + '", "longitude":"' + currPosition.coords.longitude + '"}');
+
+  console.log(currPosition);
   console.log(checkedValues);
 }
+
+
+
+
 
 
 function showRoute(arr) {
@@ -178,8 +188,9 @@ function calculateAndDisplayRoute(directionsDisplay, directionsService,
     markerArray[i].setMap(null);
   }
 
-
   var tourGuideCoordinates = [];
+  // var currPositioncoordinate = new google.maps.LatLng(currPosition.coords.latitude, currPosition.coords.longitude);
+  // tourGuideCoordinates.push({ location: currPositioncoordinate, stopover: true });
 
   for (var i = 0; i < destinationsArr.length; i++) {
     var coordinate = new google.maps.LatLng(destinationsArr[i].latitude, destinationsArr[i].longitude);
@@ -191,7 +202,7 @@ function calculateAndDisplayRoute(directionsDisplay, directionsService,
     destination: new google.maps.LatLng(destinationsArr[destinationsArr.length - 1].latitude, destinationsArr[destinationsArr.length - 1].longitude),
     waypoints: tourGuideCoordinates,
     optimizeWaypoints: true,
-    travelMode: 'WALKING' // WALKING or DRIVING
+    travelMode: 'DRIVING' // WALKING or DRIVING
   },
     function (response, status) {
       // Route the directions and pass the response to a function to create
@@ -216,8 +227,17 @@ function showSteps(destinationsArr, stepDisplay, map, markerArray) {
   var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
   var myRoute = destinationsArr[0];
+
   for (var i = 0; i < destinationsArr.length; i++) {
     var letter = labels[i];
+    if (typeof destinationsArr[i].latitude === 'string') {
+      destinationsArr[i].latitude = parseFloat(destinationsArr[i].latitude);
+      console.log(destinationsArr[i]);
+    }
+
+    if (typeof destinationsArr[i].longitude === 'string') {
+      destinationsArr[i].longitude = parseFloat(destinationsArr[i].longitude);
+    }
     var marker = new google.maps.Marker({ position: { lat: destinationsArr[i].latitude, lng: destinationsArr[i].longitude }, label: letter, map: map });
 
     attachInstructionText(
@@ -280,7 +300,7 @@ function onLoginButtonClick() {
 // google map 
 
 function initialize() {
-  var mapProp = { 
+  var mapProp = {
     center: new google.maps.LatLng(42.696552, 23.32601),
     zoom: 11,
     mapTypeId: google.maps.MapTypeId.ROADMAP
@@ -292,6 +312,34 @@ function initialize() {
   var stepDisplay = new google.maps.InfoWindow;
 
   directionsDisplay.setMap(map);
+
+  var infoWindow = new google.maps.InfoWindow({ map: map });
+
+  // Try HTML5 geolocation.
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      var pos = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
+      currPosition = position;
+      infoWindow.setPosition(pos);
+      infoWindow.setContent('Location found');
+      map.setCenter(pos);
+    }, function () {
+      handleLocationError(true, infoWindow, map.getCenter());
+    });
+  } else {
+    // Browser doesn't support Geolocation ti obqsni drugo
+    handleLocationError(false, infoWindow, map.getCenter());
+  }
+}
+
+function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+  infoWindow.setPosition(pos);
+  infoWindow.setContent(browserHasGeolocation ?
+    'Error: The Geolocation service failed.' :
+    'Error: Your browser doesn\'t support geolocation.');
 }
 
 function loadScript() {
@@ -302,6 +350,37 @@ function loadScript() {
 }
 
 window.onload = loadScript;
+
+
+
+// function userInfo() {
+//     var xhttp = new XMLHttpRequest();
+//     xhttp.onreadystatechange = function () {
+//       if (xhttp.readyState == 4 && xhttp.status == 200) {
+
+//         var myJson = xhttp.responseText;
+
+//         var parseJson = JSON.parse(myJson);
+        // if (parseJson.isSuccess == true) {
+        //   console.log(parseJson.message);
+        // } else {
+        //   console.log(parseJson.message);
+        // }
+    //   }
+    // }
+
+    // xhttp.open("POST", "/getUserInfo", true);
+    // xhttp.setRequestHeader('Content-type', 'application/json');
+
+    // console.log('{username:"' + userName.value + '", email:"' + email.value + '", password:"' + passText + '", repeatPassword:"' + repeatPassText + '"}');
+
+    // xhttp.send('{"username":"' + userName.value + '", "email":"' + email.value + '", "password":"' + passText + '", "repeatPassword":"' + repeatPassText + '"}');
+
+
+  // }
+
+
+
 
 
 
