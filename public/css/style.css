@@ -38,14 +38,7 @@ table, th, td {
   border-spacing: 0;
 }
 
-
 /* END RESET */
-
-
-/* Fonts */
-
-
-/* @font-face */
 
 
 /* Common */
@@ -81,41 +74,21 @@ h3 {
 }
 
 
-/*search style*/
-
-#imaginary_container {
-  margin-top: 20%;
-  /* Don't copy this */
-}
-
-.stylish-input-group .input-group-addon {
-  background: white !important;
-}
-
-.stylish-input-group .form-control {
-  border-right: 0;
-  box-shadow: 0 0 0;
-  border-color: #ccc;
-}
-
-.stylish-input-group button {
-  border: 0;
-  background: transparent;
-}
-
-
-/* button up */
+/* button back-to-top */
 
 .btn-group-lg>.btn, .btn-lg {
   float: right;
 }
 
 
-/* languages */
+/* google translate */
 
 #google_translate_element {
-  float: right;
   padding-top: 12px;
+}
+
+.translator {
+  float: right;
 }
 
 
@@ -129,18 +102,6 @@ h3 {
 }
 
 
-/* Video */
-
-#videoId {
-  margin: auto;
-  text-align: center;
-  padding-bottom: 90px;
-  padding-top: 35px;
-  /*width: 854px;
-  height: 468px;*/
-}
-
-
 /* nav */
 
 .navbar-inverse {
@@ -149,7 +110,7 @@ h3 {
 }
 
 
-/* slideshow */
+/* Slideshow */
 
 .carousel {
   margin-bottom: 55px !important;
@@ -157,7 +118,7 @@ h3 {
 
 .carousel-inner {
   width: 100%;
-  height: 555px;
+  height: 475px;
 }
 
 .carousel-inner > .item > img, .carousel-inner > .item > a > img {
@@ -166,10 +127,17 @@ h3 {
 }
 
 
-/* End header */
+/* Video */
 
+.embed-responsive-16by9 {
+  margin-bottom: 5% !important;
+  margin-left: 6%;
+  margin-right: 6%;
+  margin-top: 1%;
+}
 
-/* google map */
+/* End video */
+
 
 #destinationHeader {
   font-size: 24px !important;
@@ -182,7 +150,6 @@ h3 {
 
 #allDestinations {
   font-size: 16px;
-  /*background-color: #CED4D6;*/
   margin-left: 25px;
   line-height: 1.6;
 }
@@ -193,14 +160,17 @@ h3 {
 }
 
 
+/* Google map */
+
 #googleMap {
   margin: auto;
-  text-align: center;
-  /*bottom: 100rem;
-  left: 23rem;*/
-  width: 700px;
-  height: 480px;
+  text-align: justify;
+  right: 1%;
+  width: 720px;
+  height: 500px;
 }
+
+/* End google map */
 
 
 .title {
@@ -209,6 +179,20 @@ h3 {
   font-size: 16.5px;
   color: inherit;
 }
+
+.row {
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+}
+
+.destination-container {
+  max-width: 500px !important;
+}
+
+.buttons {
+  text-align: center;
+}
+
 
 /* Footer */
 
@@ -226,20 +210,5 @@ h3 {
   height: 46px;
 }
 
+
 /* End footer */
-
-.row {
-  margin-left: 0px !important;  
-}
-
-.translator {
-  float: right;
-}
-
-.destination-container {
-  max-width: 500px !important;
-}
-
-.buttons {
-  text-align: center;  
-}

@@ -82,11 +82,11 @@ app.post('/getOptimalRoute', function (req, res) {
   var desiredDestinations = [];
 
   var currDestination = {
-        name: "Current Position",
-        latitude: latitude,
-        longitude: longitude
-      };
-      desiredDestinations.push(currDestination);
+    name: "Current Position",
+    latitude: latitude,
+    longitude: longitude
+  };
+  desiredDestinations.push(currDestination);
 
 
   if (req.body.ids.length === 0) {
@@ -198,40 +198,40 @@ app.post('/getAdditionalInfo', function (req, res) {
 
 sha256 = require('js-sha256');
 
-app.post('/registerUser', 
-function (req, res) {
-  var userName = req.body.username;
-  var email = req.body.email;
-  var password = req.body.password;
-  var repeatPassword = req.body.repeatPassword;
+app.post('/registerUser',
+  function (req, res) {
+    var userName = req.body.username;
+    var email = req.body.email;
+    var password = req.body.password;
+    var repeatPassword = req.body.repeatPassword;
 
-  if (password === repeatPassword) {
-    // sravnqva parolite
-    // generira proizvolen string
-    var salt = (Math.random() * 1e32).toString(36);
-    //  console.log(salt);
-    password = password + salt;
-    password = sha256(password);
+    if (password === repeatPassword) {
+      // sravnqva parolite
+      // generira proizvolen string
+      var salt = (Math.random() * 1e32).toString(36);
+      //  console.log(salt);
+      password = password + salt;
+      password = sha256(password);
 
-    connection.query(
-      'insert into users (users.username, users.email, users.isadmin, users.password, users.salt) ' +
-      'values ("' + userName + '", "' + email + '", false , "' + password + '", "' + salt + '")',
-      function (err, rows) {
-        if (err) throw err;
-        var jsonResult = {
-          isSuccess: true,
-          message: "Регистрацията е успешна!"
-        };
-        res.send(jsonResult);
-      });
-  } else {
-    var jsonResult = {
-      isSuccess: false,
-      message: "Неуспешна регистрация."
-    };
-    res.send(jsonResult);
-  }
-});
+      connection.query(
+        'insert into users (users.username, users.email, users.isadmin, users.password, users.salt) ' +
+        'values ("' + userName + '", "' + email + '", false , "' + password + '", "' + salt + '")',
+        function (err, rows) {
+          if (err) throw err;
+          var jsonResult = {
+            isSuccess: true,
+            message: "Регистрацията е успешна!"
+          };
+          res.send(jsonResult);
+        });
+    } else {
+      var jsonResult = {
+        isSuccess: false,
+        message: "Неуспешна регистрация."
+      };
+      res.send(jsonResult);
+    }
+  });
 
 // login
 

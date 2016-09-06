@@ -20,10 +20,10 @@ function destinationInfo(arr) {
   var out = "";
   var i;
   for (i = 0; i < arr.length; i++) {
-    out += '<div style="width: 350px; height: 550px; float: left; margin-left: 10px; margin-bottom: 7%;">';
+    out += '<div style="width: 45.65%; height: 550px; float: left; margin-left: 10px; margin-bottom: 8%;">';
     out += '<h1 style="text-align: center;">' + arr[i].name + '</h1>';
-    out += '<a href="additionalDestinationsInfo.html?destination_id=' + arr[i].id + '"><img src="' + arr[i].mainPhoto + '" style="width:350px; height:250px;"></a>';
-    out += '<h3 style="font-size:14px;">' + arr[i].additionalInfo + '</h3>' + '</div>' ;
+    out += '<a href="additionalDestinationsInfo.html?destination_id=' + arr[i].id + '"><img src="' + arr[i].mainPhoto + '" style="width:100%; height:300px;"></a>';
+    out += '<h3 style="font-size:14px;">' + arr[i].additionalInfo + '</h3>' + '</div>';
   }
   document.getElementById("mainDestinationInfo").innerHTML = out;
 }
@@ -47,14 +47,16 @@ function destinationsAdditionalInfo() {
 
 function drawAdditinalInfo(destination) {
   var out = "";
-  out += '<div style="width: 350px; height: 100px; float: left; margin-left: 10px; margin-bottom: 70%;">';
+  out += '<div style="width: 100%; float: left; padding: 0 20px; text-align: justify;">';
   var i;
+  out += '<div style="text-align: center; margin-bottom: 15px;">';
   for (i = 0; i < destination.photos.length; i++) {
-    out += '<img style="width:350px; height:250px; margin-top: 15px;" src="' + destination.photos[i].filename + '">';
+    out += '<img style="width:400px; height:300px; margin-top: 15px; margin-right: 15px;" src="' + destination.photos[i].filename + '">';
   }
-  out += '<h3 style="font-size:14px; width: 1000px;">' + destination.history + '</h3>';
-  out += '<h3 style="font-size:14px; width: 1000px;">' + destination.interestingfacts + '</h3>';
-  out += '<h4 style="font-size:14px; width: 1000px;">' + destination.timeopen + '</h4>' + '</div>';
+  out += '</div>'
+  out += '<p style="font-size:14px;">' + destination.history + '</p>';
+  out += '<p style="font-size:14px;>' + destination.interestingfacts + '</p>';
+  out += '<p style="font-size:14px;">' + destination.timeopen + '</p>' + '</div>';
   document.getElementById("additionalDestinationInfo").innerHTML = out;
 }
 
@@ -62,7 +64,7 @@ function additionalInfo(arr) {
   var out = "";
   var i;
   for (i = 0; i < arr.length; i++) {
-    out += '<div style="width:350px; float: left; margin-left: 10px; margin-bottom: 7%; margin-top: 5%;">';
+    out += '<div style="width:400px; float: left; margin-left: 10px; margin-bottom: 7%; margin-top: 5%;">';
     out += '<img src="' + arr[i].mainPhoto + '" style="width:350px; height:250px;">';
     out += '<p>' + arr[i].history + '</p>';
     out += '<p style="font-size:14px;">' + arr[i].interestingfacts + '</p>';
@@ -199,6 +201,7 @@ function calculateAndDisplayRoute(directionsDisplay, directionsService,
     optimizeWaypoints: true,
     travelMode: 'DRIVING' // WALKING or DRIVING
   },
+    //calback - proverqva dali koordinatite sa OK
     function (response, status) {
       // Route the directions and pass the response to a function to create
       // markers for each step.
@@ -274,7 +277,7 @@ function onLoginButtonClick() {
         var parseJson = JSON.parse(myJson);
         if (parseJson.isSuccess == true) {
           console.log(parseJson.message);
-          alert('blaaaaaa');
+          // alert('blaaaaaa');
         } else {
           console.log(parseJson.message);
         }

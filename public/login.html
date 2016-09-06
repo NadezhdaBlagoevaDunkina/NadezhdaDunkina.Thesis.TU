@@ -8,21 +8,13 @@
     <meta name="keywords" content="HTML">
     <meta name="author" content="Nadeto">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
     <link rel=stylesheet type="text/css" href="css/style.css">
     <script src="/js/libs/jquery-3.0.0.min.js"></script>
     <script src="/js/main.js"></script>
-
     <link rel="stylesheet" href="css/footer-distributed.css">
-
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-
-    <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
     <link href="css/3-col-portfolio.css" rel="stylesheet">
-
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -30,51 +22,22 @@
 
 <body>
     <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="index.html">Начало</a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="login.html">Вход</a>
-                    </li>
-                    <li>
-                        <a href="reg.html">Регистрация</a>
-                    </li>
-                </ul>
-                <ul class="translator">
-                    <li>
-                        <div id="google_translate_element"></div><script type="text/javascript">
-function googleTranslateElementInit() {
-  new google.translate.TranslateElement({pageLanguage: 'bg', includedLanguages: 'de,en,fr', layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL}, 'google_translate_element');
-}
-</script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
+    <div id="navigation"></div>
+    <script> 
+    $(function(){
+      $("#navigation").load("navigation.html"); 
+    });
+    </script>
     <div class="container">
         <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <div class="panel-title">Вход</div>
                 </div>
-
                 <div style="padding-top:30px" class="panel-body">
                     <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
-                    <form action="/login" method="post" id="loginform" class="form-horizontal" role="form">
+                    <!-- Form -->
+                    <form action="/login" method="post" class="form-horizontal" role="form">
                         <div style="margin-bottom: 25px" class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                             <input id="login-username" type="text" class="form-control" name="username" value="" placeholder="Име" required>
@@ -85,11 +48,10 @@ function googleTranslateElementInit() {
                         </div>
                         <div style="margin-top:10px" class="form-group">
                             <div class="col-sm-12 controls">
+                                <!-- Buttons -->
                                 <button type="submit" id="btn-login" class="btn btn-success" type="button">Вход</button>
                                 <button id="btn-fblogin" class="btn btn-primary" type="button">Вход с Facebook</button>
                                 <button onclick="window.location.href='/reg.html'" class="form-link btn btn-primary" id="regBtn" style="float:right;" type="button">Регистрирай се</button>
-                                <!-- kato se cukne na Registrirai se, trqbva da se otvarq stranicata reg.html;
-                                      <a href="reg.html"> -->
                             </div>
                         </div>
                     </form>
@@ -97,8 +59,8 @@ function googleTranslateElementInit() {
             </div>
         </div>
     </div>
-
     <div class="clear"></div>
+    <!-- Footer -->
     <div id="footerId"></div>
     <script> 
     $(function(){
