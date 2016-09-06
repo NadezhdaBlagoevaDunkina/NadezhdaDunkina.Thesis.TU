@@ -192,43 +192,16 @@ h3 {
   margin-top: 15px;
 }
 
-.btnDest {
-  color: #fff;
-  background-color: #5cb85c;
-  border-color: #4cae4c;
-  display: inline-block;
-  padding: 6px 12px;
-  margin-bottom: 0;
-  font-size: 15px;
-  font-weight: 400;
-  line-height: 1.42857143;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: middle;
-  cursor: pointer;
-  background-image: none;
-  border: 1px solid transparent;
-  border-radius: 4px;
-}
 
 #googleMap {
   margin: auto;
   text-align: center;
-  bottom: 100rem;
-  left: 23rem;
+  /*bottom: 100rem;
+  left: 23rem;*/
   width: 700px;
   height: 480px;
 }
 
-.classForm {
-  margin-left: 25px;
-  margin-top: -30%;
-  background-color: #CED4D6;
-  padding-top: 15px;
-  padding-bottom: 25px;
-  text-align: center;
-  width: 25%;
-}
 
 .title {
   margin-top: 0;
@@ -236,14 +209,6 @@ h3 {
   font-size: 16.5px;
   color: inherit;
 }
-
-.headingForm {
-  color: #000000;
-  font-weight: bold;
-  background-color: #CED4D6;
-  border: none;
-}
-
 
 /* Footer */
 
@@ -261,5 +226,20 @@ h3 {
   height: 46px;
 }
 
-
 /* End footer */
+
+.row {
+  margin-left: 0px !important;  
+}
+
+.translator {
+  float: right;
+}
+
+.destination-container {
+  max-width: 500px !important;
+}
+
+.buttons {
+  text-align: center;  
+}

@@ -14,9 +14,7 @@
     <script src="/js/main.js"></script>
 
     <link rel="stylesheet" href="css/footer-distributed.css">
-
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -27,12 +25,9 @@
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
 </head>
 
 <body onLoad="chooseDestinations()">
-
-
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
@@ -49,20 +44,11 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    
-                    <!--<li>
-                        <a href="login.html">Вход</a>
-                    </li>
-                    <li>
-                        <a href="reg.html">Регистрация</a>
-                    </li>-->
                     <li>
                         <a href="/logout">Изход</a>
                     </li>
-                    <!--<li>
-            		  <input type="text" class="form-control" name="search" id="search" placeholder="Търсене...">
-              		<span class="glyphicon glyphicon-search form-control-feedback"></span>
-                    </li>-->
+                </ul>
+                <ul class="translator">
                     <li>
                         <div id="google_translate_element"></div><script type="text/javascript">
 function googleTranslateElementInit() {
@@ -72,49 +58,65 @@ function googleTranslateElementInit() {
                     </li>
                 </ul>
             </div>
-            <!-- /.navbar-collapse -->
         </div>
-        <!-- /.container -->
     </nav>
+    <div class="row">
+        <div class="col-xs-4">
+            <h1 id="destinationHeader">Изберете дестинации:</h1>
+            <div id="allDestinations"> </div>
+            <button onclick="getRoute()" id="btnChoose" class="btn btn-success">Избери</button>
+        </div>
+        <div class="col-xs-8">
+            <div id="googleMap"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="container destination-container">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <div class="panel-title">Добавяне на дестинация</div>
+                </div>
+                <div style="padding-top:30px" class="panel-body">
+                    <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
 
-
-    <h1 id="destinationHeader">Изберете дестинации:</h1>
-    <div id="allDestinations"> </div>
-    <button onclick="getRoute()" id="btnChoose" class="btnDest">Избери</button>
-
-
-
-    <div id="googleMap"></div>
-
-
-    <form action="/insertDestination" method="post" class="classForm">
-        <fieldset>
-            <div class="headingForm">
-                <legend class="title">Добавяне на дестинация:</legend>
+                    <form action="/insertDestination" method="post">
+                        <div class="form-group">
+                            <label>Име на дестинация:</label>
+                            <input type="text" name="name" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Георг. дължина:</label>
+                            <input type="number" name="longitude" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Геогр. ширина:</label>
+                            <input type="number" name="latitude" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Работно време:</label>
+                            <input type="text" name="timeopen" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>История:</label>
+                            <textarea rows="4" cols="35" placeholder="Добавете история..." class="form-control"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Интересни факти:</label>
+                            <textarea rows="4" cols="35" placeholder="Добавете интересни факти..." class="form-control"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Основна информация:</label>
+                            <textarea rows="4" cols="35" placeholder="Добавете основна информация..." class="form-control"></textarea>
+                        </div>
+                        <div class="form-group buttons">
+                            <button type="submit" value="Submit" class="btn btn-success">Добави дестинация</button>
+                            <button type="reset" value="Reset" class="btn btn-success">Изчисти полетата</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-            Име на дестинация:<br>
-            <input type="text" name="name">
-            <br><br>Георг. дължина:<br>
-            <input type="number" name="longitude">
-            <br><br>Геогр. ширина:<br>
-            <input type="number" name="latitude">
-            <br><br>Работно време:<br>
-            <input type="text" name="timeopen">
-            <br><br>История:<br>
-            <!--<input type="text" name="history">-->
-            <textarea rows="4" cols="35" placeholder="Добавете история..."></textarea>
-
-            <br><br>Интересни факти:<br>
-            <!--<input type="text" name="interestingfacts">-->
-            <textarea rows="4" cols="35" placeholder="Добавете интересни факти..."></textarea>
-            <br><br>Основна информация:<br>
-            <!--<input type="text" name="info">-->
-            <textarea rows="4" cols="35" placeholder="Добавете основна информация..."></textarea>
-            <br><br>
-            <button type="submit" value="Submit" class="btnDest">Добави дестинация</button>
-            <button type="reset" value="Reset" class="btnDest">Изчисти полетата</button>
-        </fieldset>
-    </form>
+        </div>
+    </div>
     <div id="footerId"></div>
     <script> 
     $(function(){

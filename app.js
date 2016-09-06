@@ -198,7 +198,8 @@ app.post('/getAdditionalInfo', function (req, res) {
 
 sha256 = require('js-sha256');
 
-app.post('/registerUser', function (req, res) {
+app.post('/registerUser', 
+function (req, res) {
   var userName = req.body.username;
   var email = req.body.email;
   var password = req.body.password;
@@ -226,13 +227,11 @@ app.post('/registerUser', function (req, res) {
   } else {
     var jsonResult = {
       isSuccess: false,
-      message: "Неуспешна регистрация. Паролите не съвпадат. Моля, опитайте отново."
+      message: "Неуспешна регистрация."
     };
     res.send(jsonResult);
   }
 });
-
-
 
 // login
 

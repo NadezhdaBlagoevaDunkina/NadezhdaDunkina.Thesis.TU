@@ -20,15 +20,13 @@ function destinationInfo(arr) {
   var out = "";
   var i;
   for (i = 0; i < arr.length; i++) {
-    out += '<div style="width: 350px; height: 500px; float: left; margin-left: 10px; margin-bottom: 7%;">';
+    out += '<div style="width: 350px; height: 550px; float: left; margin-left: 10px; margin-bottom: 7%;">';
     out += '<h1 style="text-align: center;">' + arr[i].name + '</h1>';
-    // na h1 style="height: 35px;" 
     out += '<a href="additionalDestinationsInfo.html?destination_id=' + arr[i].id + '"><img src="' + arr[i].mainPhoto + '" style="width:350px; height:250px;"></a>';
-    out += '<h3 style="font-size:14px;">' + arr[i].additionalInfo + '</h3>' + '</div>';
+    out += '<h3 style="font-size:14px;">' + arr[i].additionalInfo + '</h3>' + '</div>' ;
   }
   document.getElementById("mainDestinationInfo").innerHTML = out;
 }
-
 
 function destinationsAdditionalInfo() {
   var xhttp = new XMLHttpRequest();
@@ -49,18 +47,16 @@ function destinationsAdditionalInfo() {
 
 function drawAdditinalInfo(destination) {
   var out = "";
-  out += '<div style="width: 350px; height: 500px; float: left; margin-left: 10px; margin-bottom: 70%;">';
+  out += '<div style="width: 350px; height: 100px; float: left; margin-left: 10px; margin-bottom: 70%;">';
   var i;
   for (i = 0; i < destination.photos.length; i++) {
     out += '<img style="width:350px; height:250px; margin-top: 15px;" src="' + destination.photos[i].filename + '">';
   }
-  out += '<h3 style="font-size:14px;">' + destination.history + '</h3>';
-  out += '<h3 style="font-size:14px;">' + destination.interestingfacts + '</h3>';
-  out += '<h4 style="font-size:14px;">' + destination.timeopen + '</h4>' + '</div>';
+  out += '<h3 style="font-size:14px; width: 1000px;">' + destination.history + '</h3>';
+  out += '<h3 style="font-size:14px; width: 1000px;">' + destination.interestingfacts + '</h3>';
+  out += '<h4 style="font-size:14px; width: 1000px;">' + destination.timeopen + '</h4>' + '</div>';
   document.getElementById("additionalDestinationInfo").innerHTML = out;
 }
-
-
 
 function additionalInfo(arr) {
   var out = "";
@@ -74,7 +70,6 @@ function additionalInfo(arr) {
   }
   document.getElementById("additionalDestinationInfo").innerHTML = out;
 }
-
 
 // getURLParameter in Javascript
 // http://stackoverflow.com/questions/11582512/how-to-get-url-parameters-with-javascript
@@ -279,6 +274,7 @@ function onLoginButtonClick() {
         var parseJson = JSON.parse(myJson);
         if (parseJson.isSuccess == true) {
           console.log(parseJson.message);
+          alert('blaaaaaa');
         } else {
           console.log(parseJson.message);
         }
@@ -404,3 +400,4 @@ window.onload = loadScript;
 //     }
 //   );
 // }
+
