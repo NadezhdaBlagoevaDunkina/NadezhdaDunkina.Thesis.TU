@@ -20,10 +20,10 @@ function destinationInfo(arr) {
   var out = "";
   var i;
   for (i = 0; i < arr.length; i++) {
-    out += '<div style="width: 45.65%; height: 550px; float: left; margin-left: 10px; margin-bottom: 8%;">';
-    out += '<h1 style="text-align: center;">' + arr[i].name + '</h1>';
-    out += '<a href="additionalDestinationsInfo.html?destination_id=' + arr[i].id + '"><img src="' + arr[i].mainPhoto + '" style="width:100%; height:300px;"></a>';
-    out += '<h3 style="font-size:14px;">' + arr[i].additionalInfo + '</h3>' + '</div>';
+    out += '<div class="mainImage col-md-6">';
+    out += '<h1 id="destinationNameId">' + arr[i].name + '</h1>';
+    out += '<a href="additionalDestinationsInfo.html?destination_id=' + arr[i].id + '"><img class="classImages" src="' + arr[i].mainPhoto + '""></a>';
+    out += '<h3 class="classAdditionalInfo">' + arr[i].additionalInfo + '</h3>' + '</div>';
   }
   document.getElementById("mainDestinationInfo").innerHTML = out;
 }
@@ -47,16 +47,16 @@ function destinationsAdditionalInfo() {
 
 function drawAdditinalInfo(destination) {
   var out = "";
-  out += '<div style="width: 100%; float: left; padding: 0 20px; text-align: justify;">';
+  out += '<div class="drawAdditionalInfoClass">';
   var i;
-  out += '<div style="text-align: center; margin-bottom: 15px;">';
+  out += '<div class="drawAdditionalInfoClass2">';
   for (i = 0; i < destination.photos.length; i++) {
-    out += '<img style="width:400px; height:300px; margin-top: 15px; margin-right: 15px;" src="' + destination.photos[i].filename + '">';
+    out += '<img class="drawAdditInfoImg" src="' + destination.photos[i].filename + '">';
   }
   out += '</div>'
-  out += '<p style="font-size:14px;">' + destination.history + '</p>';
-  out += '<p style="font-size:14px;>' + destination.interestingfacts + '</p>';
-  out += '<p style="font-size:14px;">' + destination.timeopen + '</p>' + '</div>';
+  out += '<p class="classForP">' + destination.history + '</p>';
+  out += '<p class="classForP">' + destination.interestingfacts + '</p>';
+  out += '<p class="classForP">' + destination.timeopen + '</p>' + '</div>';
   document.getElementById("additionalDestinationInfo").innerHTML = out;
 }
 
@@ -64,11 +64,11 @@ function additionalInfo(arr) {
   var out = "";
   var i;
   for (i = 0; i < arr.length; i++) {
-    out += '<div style="width:400px; float: left; margin-left: 10px; margin-bottom: 7%; margin-top: 5%;">';
-    out += '<img src="' + arr[i].mainPhoto + '" style="width:350px; height:250px;">';
-    out += '<p>' + arr[i].history + '</p>';
-    out += '<p style="font-size:14px;">' + arr[i].interestingfacts + '</p>';
-    out += '<p style="font-size:14px;">' + arr[i].timeopen + '</p>' + '</div>';
+    out += '<div class="additionalInfoClass">';
+    out += '<img class="mainphotoClass" src="' + arr[i].mainPhoto + '">';
+    out += '<p class="classForP">' + arr[i].history + '</p>';
+    out += '<p class="classForP">' + arr[i].interestingfacts + '</p>';
+    out += '<p class="classForP">' + arr[i].timeopen + '</p>' + '</div>';
   }
   document.getElementById("additionalDestinationInfo").innerHTML = out;
 }
@@ -275,8 +275,10 @@ function onLoginButtonClick() {
         var myJson = xhttp.responseText;
 
         var parseJson = JSON.parse(myJson);
+        
         if (parseJson.isSuccess == true) {
           console.log(parseJson.message);
+          window.location.replace("login.html");
           // alert('blaaaaaa');
         } else {
           console.log(parseJson.message);
@@ -286,9 +288,6 @@ function onLoginButtonClick() {
 
     xhttp.open("POST", "/registerUser", true);
     xhttp.setRequestHeader('Content-type', 'application/json');
-
-    // console.log('{username:"' + userName.value + '", email:"' + email.value + '", password:"' + passText + '", repeatPassword:"' + repeatPassText + '"}');
-
     xhttp.send('{"username":"' + userName.value + '", "email":"' + email.value + '", "password":"' + passText + '", "repeatPassword":"' + repeatPassText + '"}');
 
 
@@ -352,31 +351,43 @@ window.onload = loadScript;
 
 
 
-// function userInfo() {
-//     var xhttp = new XMLHttpRequest();
-//     xhttp.onreadystatechange = function () {
-//       if (xhttp.readyState == 4 && xhttp.status == 200) {
+function userInfo() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
 
-//         var myJson = xhttp.responseText;
+      var myJson = xhttp.responseText;
 
-//         var parseJson = JSON.parse(myJson);
-        // if (parseJson.isSuccess == true) {
-        //   console.log(parseJson.message);
-        // } else {
-        //   console.log(parseJson.message);
-        // }
-    //   }
-    // }
+      var parseJson = JSON.parse(myJson);
 
-    // xhttp.open("POST", "/getUserInfo", true);
-    // xhttp.setRequestHeader('Content-type', 'application/json');
+      // console.log(parseJson.user.email);
+      // ot 340 red app.js 
+      // var jsonResult = {
+      //   user: userInfo
+      // };
 
-    // console.log('{username:"' + userName.value + '", email:"' + email.value + '", password:"' + passText + '", repeatPassword:"' + repeatPassText + '"}');
+      if (parseJson.user.isadmin == 0) {
+        $("#addDestination").hide(); //jQuery
 
-    // xhttp.send('{"username":"' + userName.value + '", "email":"' + email.value + '", "password":"' + passText + '", "repeatPassword":"' + repeatPassText + '"}');
+        // css; syshto raboti
+        // var div = document.getElementById('addDestination');
+        // div.style.visibility = "hidden";
+        // div.style.display = "none";
+      }
+    }
+  }
+
+  xhttp.open("POST", "/getUserInfo", true);
+  xhttp.setRequestHeader('Content-type', 'application/json');
+  xhttp.send();
+}
+
+function onDestinationPageLoad() {
+  chooseDestinations();
+  userInfo();
+}
 
 
-  // }
 
 
 

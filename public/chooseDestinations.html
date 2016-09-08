@@ -20,7 +20,7 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
-<body onLoad="chooseDestinations()">
+<body onLoad="onDestinationPageLoad()">
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
@@ -68,7 +68,7 @@ function googleTranslateElementInit() {
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row" id="addDestination">
         <div class="container destination-container">
             <div class="panel panel-info">
                 <div class="panel-heading">
@@ -110,6 +110,15 @@ function googleTranslateElementInit() {
                         <div class="form-group buttons">
                             <button type="submit" value="Submit" class="btn btn-success">Добави дестинация</button>
                             <button type="reset" value="Reset" class="btn btn-success">Изчисти полетата</button>
+                        </div>
+                    </form>
+                    <form action="/uploadFile" method="post" , enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label>Качи файл:</label>
+                            <input type="file" name="displayImage" class="form-control">
+                        </div>
+                        <div class="form-group buttons">
+                            <button type="submit" value="Submit" class="btn btn-success">Качи файл</button>
                         </div>
                     </form>
                 </div>
