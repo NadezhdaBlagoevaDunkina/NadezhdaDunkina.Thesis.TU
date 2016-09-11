@@ -114,6 +114,15 @@ h3 {
   border-color: #292c2f;
 }
 
+label#labelName {
+  margin-top: 15px;
+  vertical-align: center;
+  font-size: 16px;
+  margin-left: 15px;
+  margin-right: 15px;
+  color: lightblue;
+}
+
 
 /* Slideshow */
 
@@ -198,7 +207,6 @@ h3 {
   text-align: center;
 }
 
-
 .classImages {
   width: 100%;
   height: auto;
@@ -266,17 +274,11 @@ h3 {
 }
 
 
-
-
-
-
 /* Tablets and phones*/
 
 @media (min-width: 768px) {
-
   .mainImage {
     padding-bottom: 10px;
+    margin-left: 0px;
   }
-
-
 }

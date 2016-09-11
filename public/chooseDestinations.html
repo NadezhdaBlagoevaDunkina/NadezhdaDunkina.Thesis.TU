@@ -20,39 +20,16 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
-<body onLoad="onDestinationPageLoad()">
+<body onload="onDestinationPageLoad()">
+
+    <div id="additionalDestinationInfo"> </div>
     <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <!-- For better mobile and tablet display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="index.html">Начало</a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="/logout">Изход</a>
-                    </li>
-                </ul>
-                <ul class="translator">
-                    <li>
-                        <div id="google_translate_element"></div><script type="text/javascript">
-function googleTranslateElementInit() {
-  new google.translate.TranslateElement({pageLanguage: 'bg', includedLanguages: 'de,en,fr', layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL}, 'google_translate_element');
-}
-</script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <div id="navigation"></div>
+    <script> 
+    $(function(){
+      $("#navigation").load("navigation.html"); 
+    });
+    </script>
     <div class="row">
         <div class="col-xs-4">
             <!-- Choose destinations-->
@@ -85,11 +62,11 @@ function googleTranslateElementInit() {
                         </div>
                         <div class="form-group">
                             <label>Георг. дължина:</label>
-                            <input type="number" name="longitude" class="form-control">
+                            <input type="number" step=any name="longitude" class="form-control">
                         </div>
                         <div class="form-group">
                             <label>Геогр. ширина:</label>
-                            <input type="number" name="latitude" class="form-control">
+                            <input type="number" step=any name="latitude" class="form-control">
                         </div>
                         <div class="form-group">
                             <label>Работно време:</label>
@@ -107,12 +84,19 @@ function googleTranslateElementInit() {
                             <label>Основна информация:</label>
                             <textarea rows="4" cols="35" placeholder="Добавете основна информация..." class="form-control"></textarea>
                         </div>
+                        <div class="form-group">
+
+                            <label for="sel1">Изберете снимка:</label>
+                            <select name="mainphoto" class="form-control" id="dropdownMenuId"></select>
+                        </div>
+
+                        <br>
                         <div class="form-group buttons">
                             <button type="submit" value="Submit" class="btn btn-success">Добави дестинация</button>
                             <button type="reset" value="Reset" class="btn btn-success">Изчисти полетата</button>
                         </div>
                     </form>
-                    <form action="/uploadFile" method="post" , enctype="multipart/form-data">
+                    <form action="/uploadFile" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <label>Качи файл:</label>
                             <input type="file" name="displayImage" class="form-control">
@@ -121,6 +105,7 @@ function googleTranslateElementInit() {
                             <button type="submit" value="Submit" class="btn btn-success">Качи файл</button>
                         </div>
                     </form>
+
                 </div>
             </div>
         </div>

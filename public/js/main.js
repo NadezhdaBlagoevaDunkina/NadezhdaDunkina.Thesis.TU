@@ -275,13 +275,12 @@ function onLoginButtonClick() {
         var myJson = xhttp.responseText;
 
         var parseJson = JSON.parse(myJson);
-        
+
         if (parseJson.isSuccess == true) {
-          console.log(parseJson.message);
+          alert(parseJson.message);
           window.location.replace("login.html");
-          // alert('blaaaaaa');
         } else {
-          console.log(parseJson.message);
+          alert(parseJson.message);
         }
       }
     }
@@ -365,14 +364,27 @@ function userInfo() {
       // var jsonResult = {
       //   user: userInfo
       // };
+      console.log(parseJson.user);
 
-      if (parseJson.user.isadmin == 0) {
+      if (parseJson.user == undefined || parseJson.user.isadmin == 0) { // ne e vlqzul v sistemata ili e vlqzul, no ne e admin, a e potrebitel
         $("#addDestination").hide(); //jQuery
-
         // css; syshto raboti
         // var div = document.getElementById('addDestination');
         // div.style.visibility = "hidden";
         // div.style.display = "none";
+      }
+      if (parseJson.user == undefined) { // ne e vlqzul v sistemata
+        $("#logoutId").hide(); //jQuery
+        $("#choosedestId").hide(); //jQuery
+        if (window.location.href == '/chooseDestinations.html') {
+          window.location.href = '/index.html';
+        }
+      } else { //potrebitelqt e vlqzul v sistemata
+        $("#loginId").hide(); //jQuery
+        $("#regId").hide(); //jQuery
+        // $("#choosedestId").show(); //jQuery
+        document.getElementById('labelName').innerHTML = 'Здравей, ' + parseJson.user.username + '!';
+
       }
     }
   }
@@ -385,10 +397,73 @@ function userInfo() {
 function onDestinationPageLoad() {
   chooseDestinations();
   userInfo();
+  getDestinationImages();
 }
 
 
 
+function drawImagesFilename(arr) {
+  //arr e masivut s imenata na destinaciite - string tip sa imenata
+  var out = "";
+  var i;
+  for (i = 0; i < arr.length; i++) {
+    out += '<option value="' + arr[i] + '">' + arr[i] + '</option>';
+  }
+  document.getElementById("dropdownMenuId").innerHTML = out;
+}
+
+
+
+function getDestinationImages() {
+
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    // kato survura vurne otgovor json
+
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
+
+      //vuv var myJson ima string
+      var myJson = xhttp.responseText;
+
+      //parseJson veche e parsnat kym json obekt, a ne string
+      var parseJson = JSON.parse(myJson);
+
+      drawImagesFilename(parseJson.images);
+
+    }
+  };
+  xhttp.open("POST", "/getImages", true);
+  xhttp.setRequestHeader('Content-type', 'application/json');
+
+  xhttp.send(); //survurut ne ochakva parametri -> send()
+
+}
+
+
+// function onHeaderLoaded() {
+//   console.log("gasgasadasdafsadfsffasfas");
+//   var xhttp = new XMLHttpRequest();
+//   xhttp.onreadystatechange = function () {
+//     // kato survura vurne otgovor json
+
+//     if (xhttp.readyState == 4 && xhttp.status == 200) {
+//       var myJson = xhttp.responseText;
+
+//       //parseJson veche e parsnat kym json obekt, a ne string
+//       var parseJson = JSON.parse(myJson);
+//       if (parseJson.user == undefined) {
+//         console.log("Не сте влезли в системата.")
+//       }
+//       else {
+//         console.log(parseJson.user.id);
+//       }
+//     }
+//   };
+//   xhttp.open("POST", "/getUserInfo", true);
+//   xhttp.setRequestHeader('Content-type', 'application/json');
+
+//   xhttp.send(); //survurut ne ochakva parametri -> send()
+// }
 
 
 

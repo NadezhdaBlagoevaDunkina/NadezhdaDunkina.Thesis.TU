@@ -15,11 +15,21 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="login.html">Вход</a>
+                    <a href="login.html" id="loginId">Вход</a>
                 </li>
                 <li>
-                    <a href="reg.html">Регистрация</a>
+                    <a href="reg.html" id="regId">Регистрация</a>
                 </li>
+                <li>
+                    <a href="chooseDestinations.html" id="choosedestId">Изберете дестинация</a>
+                </li>
+                <li>
+                    <label id="labelName" for="name"></label>
+                </li>
+                <li>
+                    <a href="/logout" id="logoutId">Изход</a>
+                </li>
+
             </ul>
             <ul class="translator">
                 <li>
@@ -33,4 +43,8 @@ function googleTranslateElementInit() {
             </ul>
         </div>
     </div>
+    <script>
+    userInfo();
+    onHeaderLoaded(); 
+    </script>
 </nav>
