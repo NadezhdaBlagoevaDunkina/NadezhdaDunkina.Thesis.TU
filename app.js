@@ -11,7 +11,7 @@ var passport = require('passport');
 var file = require('file-system');
 var fs = require('fs');
 var busboy = require('connect-busboy');
-app.use(busboy()); 
+app.use(busboy());
 app.use(bodyParser.json());       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
@@ -64,7 +64,7 @@ app.post('/getAllDestinations', function (req, res) {
           id: rows[i].id,
           additionalInfo: rows[i].info,
           timeOpen: rows[i].timeopen,
-          mainPhoto: "img/" + rows[i].filename
+          mainPhoto: "img/destinations/" + rows[i].filename
         };
         destinations.push(destination);
       }
@@ -180,7 +180,7 @@ app.post('/getAdditionalInfo', function (req, res) {
           var photos = [];
           for (var i in imagerows) {
             var photo = {
-              filename: "img/" + imagerows[i].filename
+              filename: "img/destinations/" + imagerows[i].filename
             };
             photos.push(photo);
           }
@@ -197,6 +197,8 @@ app.post('/getAdditionalInfo', function (req, res) {
     }
   );
 });
+
+
 
 
 // registration
@@ -237,6 +239,9 @@ app.post('/registerUser',
       res.send(jsonResult);
     }
   });
+
+
+
 
 // login
 
@@ -296,6 +301,8 @@ app.get('/logout', function (req, res) {
   });
 });
 
+
+
 app.post('/insertDestination', function (req, res) {
   var username = req.session.passport.user;
   var name = req.body.name;
@@ -305,16 +312,39 @@ app.post('/insertDestination', function (req, res) {
   var history = req.body.history;
   var interestingfacts = req.body.interestingfacts;
   var info = req.body.info;
+  var photoName = req.body.mainphoto; // ndk.jpg, imeto na snimkata kato string (koqto i da e snimka)
   db_layer.getUser(username, connection, function (user) {
-    if (user == null || !user.isadmin) {
-      res.redirect('/index.html'); //nqkakva geshka; stranica, v koqto da izpishe, che ne si admin i nqmash prava za dobavqne na destinaciq
+    if (user == null) {
+      res.status(401); // ne se e lognal potrebitel
+      res.send('Не сте влезли в системата.');
+    } else if (!user.isadmin) {
+      res.status(403); // nqma prava
+      res.send('Нямате права за това действие!');
     } else {
+
       connection.query(
-        'insert into destinations (destinations.name, destinations.longitude, destinations.latitude, destinations.timeopen, destinations.history, destinations.interestingfacts, destinations.info) ' + //fix query
+        'insert into destinations (destinations.name, destinations.longitude, destinations.latitude, destinations.timeopen, destinations.history, destinations.interestingfacts, destinations.info) ' +
         'values ("' + name + '", "' + longitude + '", "' + latitude + '", "' + timeopen + '", "' + history + '", "' + interestingfacts + '", "' + info + '")',
-        function (err, rows) {
+        function (err, insertDestResult) {
           if (err) throw err;
-          res.redirect('/chooseDestinations.html'); //onova s destinaciite
+          console.log(insertDestResult.insertId); //rezultat na zaqvkata; insertId e id-to na posledniq insertnat obekt, t.e. id-to na destinaciqta
+
+          connection.query(
+            'insert into photos (photos.filename, photos.destination_id) ' +
+            'values ("' + photoName + '", "' + insertDestResult.insertId + '")',
+            function (err, insertImgResult) {
+              if (err) throw err;
+
+              connection.query(
+                'update destinations ' +
+                'set mainphoto_id=' + insertImgResult.insertId +
+                ' where id=' + insertDestResult.insertId,
+                function (err, updateDestResult) {
+                  if (err) throw err;
+                  res.redirect('/chooseDestinations.html'); //onova s destinaciite
+                }
+              );
+            });
         });
     }
   });
@@ -330,9 +360,7 @@ app.post('/getUserInfo', function (req, res) {
   }
   var username = req.session.passport.user;
   db_layer.getUser(username, connection, function (user) {
-    // if (user == null || !user.isadmin) {
-    //   res.redirect('/index.html');
-    // var users = [];
+
     var userInfo = {
       id: user.id,
       username: user.username,
@@ -349,54 +377,67 @@ app.post('/getUserInfo', function (req, res) {
 });
 
 
-app.listen(PORT);
 
-
-
-// var image = {
-//   displayImage: {
-//     size: 11885,
-//     path: '/img',
-//     name: 'avatar.png',
-//     type: 'image/png',
-//     _writeStream: {
-//       path: '/img',
-//       fd: 14,
-//       writable: false,
-//       flags: 'w',
-//       encoding: 'binary',
-//       mode: 438,
-//       bytesWritten: 11885,
-//       busy: false,
-//       _queue: [],
-//       drainable: true
-//     },
-//     length: [Getter],
-//     filename: [Getter],
-//     mime: [Getter]
-//   }
-// }
+// Upload File
+// kachvam failove na survura
 
 app.post('/uploadFile', function (req, res) {
 
- var fstream;
-    req.pipe(req.busboy);
-    req.busboy.on('file', function (fieldname, file, filename) {
-        console.log("Uploading: " + filename); 
-        fstream = fs.createWriteStream(__dirname + '/public/img/' + filename);
+  var username = req.session.passport.user;
+
+  db_layer.getUser(username, connection, function (user) {
+    if (user == null) {
+      res.status(401); // ne se e lognal potrebitel
+      res.send('Не сте влезли в системата.');
+    } else if (!user.isadmin) {
+      res.status(403); // nqma prava
+      res.send('Нямате права за това действие!');
+    } else {
+      var fstream;
+      req.pipe(req.busboy); //module; busboy se polzva, za da se vzeme faila
+      req.busboy.on('file', function (fieldname, file, filename) {
+        console.log("Uploading: " + filename);
+        fstream = fs.createWriteStream(__dirname + '/public/img/destinations/' + filename);
         file.pipe(fstream);
         fstream.on('close', function () {
-            res.redirect('back');
+          res.redirect('back');
         });
-    });
+      });
+    }
 
-  // fs.readFile(req.files.displayImage.path, function (err, data) {
-  //   // ...
-  //   var newPath = __dirname + "/img/" + req.files.displayImage.name;
-  //   fs.writeFile(newPath, data, function (err) {
-  //     res.redirect("back");
-  //   });
-  // });
+  });
+
 });
 
 
+// Get images 
+
+app.post('/getImages', function (req, res) {
+
+  var username = req.session.passport != undefined ? req.session.passport.user : undefined;
+
+  db_layer.getUser(username, connection, function (user) {
+    if (user == null) {
+      res.status(401); // ne se e lognal potrebitel
+      res.send('Не сте влезли в системата.');
+    } else if (!user.isadmin) {
+      res.status(403); // nqma prava
+      res.send('Нямате права за това действие!');
+    } else {
+      fs.readdir('public/img/destinations/', function (err, files) {
+        if (err) throw err;
+        var jsonResult = { images: files };
+        //filenames na snimkite 
+        res.send(jsonResult);
+      });
+    }
+
+  });
+
+});
+
+
+
+
+
+app.listen(PORT);
