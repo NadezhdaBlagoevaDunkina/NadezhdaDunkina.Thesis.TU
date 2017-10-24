@@ -85,7 +85,7 @@ module.exports = {
             if (d1 === d2) {
                 return 0;
             }
-            //TODO provide beter implementation
+            //TODO provide better implementation
             return Math.sqrt(Math.pow(d1.latitude - d2.latitude, 2) + Math.pow(d1.longitude - d2.longitude, 2));
         };
         return algorithm;
