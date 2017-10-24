@@ -339,14 +339,14 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
     'Error: Your browser doesn\'t support geolocation.');
 }
 
-function loadScript() {
-  var script = document.createElement("script");
-  script.type = "text/javascript";
-  script.src = "http://maps.googleapis.com/maps/api/js?key=AIzaSyDlc8Dwnj_i2oKm5ohMSFd6d7WQE_x9BDM&sensor=false&callback=initialize";
-  document.body.appendChild(script);
-}
+// function loadScript() {
+//   var script = document.createElement("script");
+//   script.type = "text/javascript";
+//   script.src = "http://maps.googleapis.com/maps/api/js?key=AIzaSyCwARFFSHQyuwrANSxLORZ1p3VfS1mi31Y&sensor=false&callback=initialize";
+//   document.body.appendChild(script);
+// }
 
-window.onload = loadScript;
+//window.onload = loadScript;
 
 
 
@@ -364,7 +364,10 @@ function userInfo() {
       // var jsonResult = {
       //   user: userInfo
       // };
-      console.log(parseJson.user);
+      
+
+      // show user - undefined, admin, user
+      // console.log(parseJson.user);
 
       if (parseJson.user == undefined || parseJson.user.isadmin == 0) { // ne e vlqzul v sistemata ili e vlqzul, no ne e admin, a e potrebitel
         $("#addDestination").hide(); //jQuery
@@ -398,6 +401,7 @@ function onDestinationPageLoad() {
   chooseDestinations();
   userInfo();
   getDestinationImages();
+  initialize();
 }
 
 
