@@ -1,32 +1,43 @@
-<!-- Footer -->
-<footer class="footer-distributed">
-    <div class="footer-right">
-        <a href="https://www.facebook.com/" target="_blank"><i class="fa fa-facebook"></i></a>
-        <a href="https://twitter.com/" target="_blank"><i class="fa fa-twitter"></i></a>
-        <a href="https://www.instagram.com/" target="_blank"><i class="fa fa-instagram"></i></a>
-    </div>
-    <div class="footer-left">
-        <img src="img/tu-logo.png" />
-        <p>Nadezhda Blagoeva Dunkina, FKSU, TU-Sofia, 2017</p>
-    </div>
-    <a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button" data-toggle="tooltip" data-placement="left"><span class="glyphicon glyphicon-chevron-up"></span></a>
-    <script>
-    $(document).ready(function(){
-        $(window).scroll(function () {
-            if ($(this).scrollTop() > 50) {
-                $('#back-to-top').fadeIn();
-            } else {
-                $('#back-to-top').fadeOut();                               
-            }
-        });
-        $('#back-to-top').click(function () {
-            $('#back-to-top').tooltip('hide');
-            $('body,html').animate({
-                scrollTop: 0
-            }, 800);
-            return false;
-        });     
-        $('#back-to-top').tooltip('show');
-    });
-    </script>
-</footer>
+<!DOCTYPE html>
+<html lang="en">
+    <!-- Footer -->
+    <footer class="footer-distributed">
+        <div class="footer-right">
+            <a href="https://www.facebook.com/" target="_blank"><i class="fa fa-facebook"></i></a>
+            <a href="https://twitter.com/" target="_blank"><i class="fa fa-twitter"></i></a>
+            <a href="https://www.instagram.com/" target="_blank"><i class="fa fa-instagram"></i></a>
+        </div>
+        <div class="footer-left">
+            <img src="img/tu-logo.png" alt="TU Sofia" class="logo-tu"/> 
+            <p>Nadezhda Blagoeva Dunkina, FKSU,
+                <span id="year"></span> 
+                 <script type="text/javascript">
+                    var date = new Date(),
+                        year = date.getFullYear();
+                        document.getElementById("year").innerHTML = year; 
+                </script>
+            </p>
+          
+        </div>
+        <a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button" data-toggle="tooltip" data-placement="left"><span class="glyphicon glyphicon-chevron-up"></span></a>
+        <script type="text/javascript">
+        $(document).ready(function(){
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 50) {
+                    $('#back-to-top').fadeIn();
+                } else {
+                    $('#back-to-top').fadeOut();                               
+                }
+            });
+            $('#back-to-top').click(function () {
+                $('#back-to-top').tooltip('hide');
+                $('body,html').animate({
+                    scrollTop: 0
+                }, 800);
+                return false;
+            });     
+            $('#back-to-top').tooltip('show');
+        }); 
+        </script>
+    </footer>
+</html>
