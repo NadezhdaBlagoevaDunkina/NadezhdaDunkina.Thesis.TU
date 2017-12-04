@@ -26,9 +26,9 @@
     <!-- Navigation -->
     <div id="navigation"></div>
     <script> 
-    $(function(){
-      $("#navigation").load("navigation.html"); 
-    });
+        $(function(){
+        $("#navigation").load("navigation.html"); 
+        });
     </script>
     <!-- Header -->
     <div class="row">
@@ -46,7 +46,8 @@
                 slidesToShow: 3,  
                 slidesToScroll: 1,
                 dots: false, 
-                arrows: true,
+                prevArrow:"<button class='a-left control-c prev slick-prev'/>",
+                nextArrow:"<button class='a-right control-c next slick-next'/>",
                 responsive: [
                     {
                     breakpoint: 768,
@@ -63,20 +64,19 @@
     <div id="myCarousel" class="carousel">
         <div class="carousel-image">
             <img src="img/izgledNadSofia.jpg" alt="izgledSf" class="images">
-            </div>
+        </div>
         <div class="carousel-image">
             <img src="img/turist.jpg" alt="turist" class="images">
-            </div>
+        </div>
         <div class="carousel-image">
             <img src="img/travelling.jpg" alt="pytuvane" class="images">
-            </div>
+        </div>
         <div class="carousel-image">
             <img src="img/turisti.jpg" alt="turisti" class="images">
-            </div>
+        </div>
     </div>
 
     <!-- Video -->
-    <!-- 16:9 aspect ratio -->
     <div class="embed-responsive embed-responsive-16by9">
         <iframe class="embed-responsive-item" allowfullscreen="" src="https://www.youtube.com/embed/kPfQ4g1jTks"></iframe>
     </div>
