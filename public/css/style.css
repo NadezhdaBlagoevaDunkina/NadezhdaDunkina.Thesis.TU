@@ -104,9 +104,8 @@ h3 {
 }
 
 #mainDestinationInfo h3 {
-    min-height: 235px;
+    min-height: 100px;
 }
-
 
 /* nav */
 
@@ -169,6 +168,7 @@ label#labelName {
     background: none;
     outline: none;
     border: 0;
+    color: black;
     z-index: 999;
 }
 
@@ -315,6 +315,10 @@ label#labelName {
     color: cornflowerblue !important;
 }
 
+.footer-distributed .footer-right {
+    margin-right: 50px;
+}
+
 
 #back-to-top {
     height: 46px;
@@ -361,4 +365,22 @@ label#labelName {
     .images {  
         height: 270px;
     } 
+
+    /* fix */
+    div#mainDestinationInfo .mainImage:nth-child(5),
+    div#mainDestinationInfo .mainImage:nth-child(7),
+    div#mainDestinationInfo .mainImage:nth-child(9),
+    div#mainDestinationInfo .mainImage:nth-child(11),
+    div#mainDestinationInfo .mainImage:nth-child(13),
+    div#mainDestinationInfo .mainImage:nth-child(15),
+    div#mainDestinationInfo .mainImage:nth-child(17),
+    div#mainDestinationInfo .mainImage:nth-child(19),
+    div#mainDestinationInfo .mainImage:nth-child(21),
+    div#mainDestinationInfo .mainImage:nth-child(23),
+    div#mainDestinationInfo .mainImage:nth-child(25),
+    div#mainDestinationInfo .mainImage:nth-child(27),
+    div#mainDestinationInfo .mainImage:nth-child(29)  
+    {
+        float: right;
+    }
 }
