@@ -256,6 +256,10 @@ label#labelName {
     text-align: center;
 }
 
+#destinationNameId:hover {
+    text-shadow: 1px 1px 5px rgba(35, 100, 200, 0.75);
+}
+
 .drawAdditionalInfoClass {
     width: 100%;
     float: left;
