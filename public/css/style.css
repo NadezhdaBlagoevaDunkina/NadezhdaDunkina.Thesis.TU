@@ -276,6 +276,14 @@ label#labelName {
     font-size: 14px;
 }
 
+#addDestination {
+    margin-top: 100px;
+}
+
+#allDestinations label > input {
+    margin-right: 10px;
+}
+
 .additionalInfoClass {
     width: 400px;
     float: left;
