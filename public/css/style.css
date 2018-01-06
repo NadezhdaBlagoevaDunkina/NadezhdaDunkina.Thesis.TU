@@ -305,6 +305,15 @@ label#labelName {
     margin-right: 25px;
 }
 
+.controls {
+    text-align: center;
+}
+
+#regBtn {
+    position: absolute;
+    right: 6%;
+}
+
 /* add zoom */
 
 .drawAdditInfoImg.zoom:hover {
