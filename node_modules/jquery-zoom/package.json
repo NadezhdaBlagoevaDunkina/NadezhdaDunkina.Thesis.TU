@@ -1,0 +1,57 @@
+{
+  "name": "jquery-zoom",
+  "description": "Enlarge images on click or mouseover.",
+  "version": "1.7.20",
+  "keywords": [
+    "zoom",
+    "images",
+    "ui",
+    "jquery-plugin"
+  ],
+  "author": {
+    "name": "Jack Moore",
+    "email": "hello@jacklmoore.com",
+    "url": "http://www.jacklmoore.com"
+  },
+  "main": "jquery.zoom.js",
+  "license": "MIT",
+  "homepage": "http://www.jacklmoore.com/zoom",
+  "demo": "http://www.jacklmoore.com/zoom",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/jackmoore/zoom.git"
+  },
+  "dependencies": {
+    "jquery": ">=1.7"
+  },
+  "gitHead": "5df07ec46338bb89d200e035e822cf0462761e1a",
+  "bugs": {
+    "url": "https://github.com/jackmoore/zoom/issues"
+  },
+  "_id": "jquery-zoom@1.7.20",
+  "scripts": {},
+  "_shasum": "25b9f9dc50804b48c21f1796949a5f6ac17fbba7",
+  "_from": "jquery-zoom@latest",
+  "_npmVersion": "3.10.3",
+  "_nodeVersion": "6.3.1",
+  "_npmUser": {
+    "name": "jacklmoore",
+    "email": "hello@jacklmoore.com"
+  },
+  "maintainers": [
+    {
+      "name": "jacklmoore",
+      "email": "hello@jacklmoore.com"
+    }
+  ],
+  "dist": {
+    "shasum": "25b9f9dc50804b48c21f1796949a5f6ac17fbba7",
+    "tarball": "https://registry.npmjs.org/jquery-zoom/-/jquery-zoom-1.7.20.tgz"
+  },
+  "_npmOperationalInternal": {
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/jquery-zoom-1.7.20.tgz_1493105326391_0.5910254092887044"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/jquery-zoom/-/jquery-zoom-1.7.20.tgz"
+}

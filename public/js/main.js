@@ -51,7 +51,7 @@ function drawAdditinalInfo(destination) {
   var i;
   out += '<div class="drawAdditionalInfoClass2">';
   for (i = 0; i < destination.photos.length; i++) {
-    out += '<img class="drawAdditInfoImg" src="' + destination.photos[i].filename + '">';
+    out += '<img class="drawAdditInfoImg zoom" src="' + destination.photos[i].filename + '">';
   }
   out += '</div>'
   out += '<p class="classForP">' + destination.history + '</p>';
