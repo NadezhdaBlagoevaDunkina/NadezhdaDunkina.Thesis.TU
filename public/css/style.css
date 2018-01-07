@@ -101,6 +101,7 @@ h3 {
     margin: 15px 0 15px !important;
     text-shadow: 1px 1px 5px rgba(35, 100, 200, 0.75);
     text-align: center;
+    padding: 0 20px;
 }
 
 #mainDestinationInfo h3 {
@@ -168,7 +169,7 @@ label#labelName {
     background: none;
     outline: none;
     border: 0;
-    color: black;
+    color: white;
     z-index: 999;
 }
 
@@ -369,7 +370,7 @@ label#labelName {
     height: 46px;
     position: absolute;
     right: 20px;
-    bottom: 2%; 
+    bottom: 1%; 
 }
 
 
