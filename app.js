@@ -82,8 +82,8 @@ app.post('/getOptimalRoute', function (req, res) {
   // var desiredDestinations = [{"name":"ndk", "latitude":23.1234, "longitude":42.4321},
   //     {"name":"kopitoto", "latitude":23.4321, "longitude":43.1234},
   //     {"name":"nim", "latitude":23.5678, "longitude":42.8765}];//TODO get this from request
-  var latitude = req.body.latitude;
-  var longitude = req.body.longitude;
+  var latitude = parseFloat(req.body.latitude);
+  var longitude = parseFloat(req.body.longitude);
   var desiredDestinations = [];
 
   var currDestination = {
@@ -122,7 +122,6 @@ app.post('/getOptimalRoute', function (req, res) {
       var tspAlgorithm = tsp.getTspAlgorithm();
       tspAlgorithm.setDestinations(desiredDestinations);
       var orderedDestinations = tspAlgorithm.calculateOptimalRoute();
-      console.log(orderedDestinations);
       res.send({ destinations: orderedDestinations });
     }
   );

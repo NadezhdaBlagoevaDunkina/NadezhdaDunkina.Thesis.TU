@@ -150,9 +150,6 @@ function getRoute() {
   // xhttp.send('{"username":"' + userName.value + '", "email":"' + email.value + '", "password":"' + passText + '", "repeatPassword":"' + repeatPassText + '"}');
 
   xhttp.send('{"ids":[' + checkedValues + '] , "latitude":"' + currPosition.coords.latitude + '", "longitude":"' + currPosition.coords.longitude + '"}');
-
-  console.log(currPosition);
-  console.log(checkedValues);
 }
 
 
@@ -230,7 +227,6 @@ function showSteps(destinationsArr, stepDisplay, map, markerArray) {
     var letter = labels[i];
     if (typeof destinationsArr[i].latitude === 'string') {
       destinationsArr[i].latitude = parseFloat(destinationsArr[i].latitude);
-      console.log(destinationsArr[i]);
     }
 
     if (typeof destinationsArr[i].longitude === 'string') {
