@@ -411,22 +411,4 @@ label#labelName {
     .images {  
         height: 270px;
     } 
-
-    /* fix */
-    div#mainDestinationInfo .mainImage:nth-child(5),
-    div#mainDestinationInfo .mainImage:nth-child(7),
-    div#mainDestinationInfo .mainImage:nth-child(9),
-    div#mainDestinationInfo .mainImage:nth-child(11),
-    div#mainDestinationInfo .mainImage:nth-child(13),
-    div#mainDestinationInfo .mainImage:nth-child(15),
-    div#mainDestinationInfo .mainImage:nth-child(17),
-    div#mainDestinationInfo .mainImage:nth-child(19),
-    div#mainDestinationInfo .mainImage:nth-child(21),
-    div#mainDestinationInfo .mainImage:nth-child(23),
-    div#mainDestinationInfo .mainImage:nth-child(25),
-    div#mainDestinationInfo .mainImage:nth-child(27),
-    div#mainDestinationInfo .mainImage:nth-child(29)  
-    {
-        float: right;
-    }
 }
