@@ -79,9 +79,6 @@ app.post('/getAllDestinations', function (req, res) {
 
 
 app.post('/getOptimalRoute', function (req, res) {
-  // var desiredDestinations = [{"name":"ndk", "latitude":23.1234, "longitude":42.4321},
-  //     {"name":"kopitoto", "latitude":23.4321, "longitude":43.1234},
-  //     {"name":"nim", "latitude":23.5678, "longitude":42.8765}];//TODO get this from request
   var latitude = parseFloat(req.body.latitude);
   var longitude = parseFloat(req.body.longitude);
   var desiredDestinations = [];
@@ -126,35 +123,6 @@ app.post('/getOptimalRoute', function (req, res) {
     }
   );
 });
-
-
-
-
-//   var desiredDestinations = [{"name":"ndk", "latitude":0, "longitude":0},
-//       {"name":"kopitoto", "latitude":0, "longitude":30},
-//       {"name":"nim", "latitude":40, "longitude":0},
-//       {"name":"asdf", "latitude":40, "longitude":30},
-//       {"name":"qwe", "latitude":30, "longitude":40}];//TODO get this from request
-//   var tspAlgorithm = tsp.getTspAlgorithm();
-//   tspAlgorithm.setDestinations(desiredDestinations);
-//   var orderedDestinations = tspAlgorithm.calculateOptimalRoute();
-//   res.send(orderedDestinations);
-// });
-
-
-
-// var destinations = [
-//   {     "name": "Try",
-//     "bannerImg1": "img/ujenPark.jpg",
-//     "additionalInfo": "sadsadadssadsad"
-//   },
-//   {
-//     "name": "Try2",
-//     "bannerImg1": "img/ban.jpg",
-//     "additionalInfo": "sadsadadssadsad"
-//   }
-// ];
-
 
 
 app.post('/getAdditionalInfo', function (req, res) {
@@ -434,9 +402,5 @@ app.post('/getImages', function (req, res) {
   });
 
 });
-
-
-
-
 
 app.listen(PORT);
